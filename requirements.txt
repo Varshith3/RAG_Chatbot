@@ -1,3 +1,4 @@
 dotenv
 langchain-community
+langchain-cohere
 streamlit
