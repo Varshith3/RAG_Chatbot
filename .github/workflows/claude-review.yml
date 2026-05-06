@@ -15,14 +15,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0   # Full git history so Claude understands context
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1  
+          aws-region: us-east-1   # Change this if your Bedrock is in a different region
 
       - name: Run Claude Code Review
         uses: anthropics/claude-code-action@v1
@@ -42,3 +42,4 @@ jobs:
             
             Be specific — mention exact file names and line numbers.
             Keep your review concise and actionable.
+          claude_args: "--model apac.anthropic.claude-sonnet-4-20250514-v1:0"
