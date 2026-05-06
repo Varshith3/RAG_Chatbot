@@ -42,4 +42,4 @@ jobs:
             
             Be specific — mention exact file names and line numbers.
             Keep your review concise and actionable.
-          claude_args: "--model ap.anthropic.claude-3-haiku-20240307-v1:0"
+          claude_args: "--model anthropic.claude-3-haiku-20240307-v1:0"
