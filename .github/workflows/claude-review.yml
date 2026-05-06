@@ -30,8 +30,9 @@ jobs:
         with:
           use_bedrock: "true"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          show_full_output: true
           prompt: |
-            You are a senior Python developer reviewing a RAG (Retrieval-Augmented Generation) chatbot project.
+            You are a Python developer reviewing a RAG (Retrieval-Augmented Generation) chatbot project.
             
             Review the changes in this pull request and check for:
             1. Python bugs or logic errors
@@ -39,7 +40,6 @@ jobs:
             3. Security issues (hardcoded API keys, exposed secrets, unsafe user inputs)
             4. Missing error handling or edge cases
             5. Anything that could break the Streamlit app
-            
-            Be specific — mention exact file names and line numbers.
+
             Keep your review concise and actionable.
           claude_args: "--model global.anthropic.claude-sonnet-4-6"
