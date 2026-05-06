@@ -23,7 +23,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1   # Change this if your Bedrock is in a different region
+          aws-region: us-east-1  
 
       - name: Run Claude Code Review
         uses: anthropics/claude-code-action@v1
@@ -31,14 +31,7 @@ jobs:
           use_bedrock: "true"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           show_full_output: true
-          allowed_tools: "Bash,Read,Write"
-          additional_permissions: |
-            - Bash(gh pr view:*)
-            - Bash(gh pr diff:*)
-            - Bash(gh pr comment:*)
-            - Bash(gh api:*)
-            - Bash(git diff:*)
-            - Bash(git log:*)
+          permission_mode: "bypassPermissions"
           prompt: |
             You are a Python developer reviewing a RAG (Retrieval-Augmented Generation) chatbot project.
             The PR number for this review is: ${{ github.event.pull_request.number }}
@@ -51,8 +44,6 @@ jobs:
             1. Python bugs or logic errors
             2. LangChain / LLM integration issues
             3. Security issues (hardcoded API keys, exposed secrets, unsafe user inputs)
-            4. Missing error handling or edge cases
-            5. Anything that could break the Streamlit app
 
             Keep your review concise and actionable.
           claude_args: "--model global.anthropic.claude-sonnet-4-6"
