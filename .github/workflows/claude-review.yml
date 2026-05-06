@@ -7,8 +7,6 @@ on:
 jobs:
   claude-review:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
     
     permissions:
       contents: read
@@ -40,14 +38,12 @@ jobs:
           
           prompt: |
              Review this Python RAG chatbot PR.
-
             Focus on:
             - bugs
             - LangChain issues
             - security problems
             - missing error handling
-            - Streamlit-breaking changes
-
+            
             IMPORTANT:
             Output the final review as markdown suitable for a GitHub PR comment.
           claude_args: "--model global.anthropic.claude-sonnet-4-6"
