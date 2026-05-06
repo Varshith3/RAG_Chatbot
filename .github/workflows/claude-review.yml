@@ -35,14 +35,19 @@ jobs:
           use_bedrock: "true"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           show_full_output: true
+          use_sticky_comment: true
+          display_report: true
           
           prompt: |
-            You are reviewing a RAG chatbot PR request.
-            
-            Review the changes in this pull request and check for:
-            1. Python bugs or logic errors
-            2. LangChain / LLM integration issues
-            3. Security issues (hardcoded API keys, exposed secrets, unsafe user inputs)
+             Review this Python RAG chatbot PR.
 
-            Keep your review concise and actionable.
+            Focus on:
+            - bugs
+            - LangChain issues
+            - security problems
+            - missing error handling
+            - Streamlit-breaking changes
+
+            IMPORTANT:
+            Output the final review as markdown suitable for a GitHub PR comment.
           claude_args: "--model global.anthropic.claude-sonnet-4-6"
