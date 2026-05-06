@@ -62,3 +62,6 @@ def get_answer(question):
     response = llm.predict(prompt).strip()
 
     return response
+
+def greet(name):
+        print("Hello", name)
