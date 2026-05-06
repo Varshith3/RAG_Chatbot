@@ -22,7 +22,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1   # Change this if your Bedrock is in a different region
+          aws-region: us-east-1   # Change this if your Bedrock is in a different region
 
       - name: Run Claude Code Review
         uses: anthropics/claude-code-action@v1
@@ -36,10 +36,9 @@ jobs:
             1. Python bugs or logic errors
             2. LangChain / LLM integration issues
             3. Security issues (hardcoded API keys, exposed secrets, unsafe user inputs)
-            4. Code quality and readability
-            5. Missing error handling or edge cases
-            6. Anything that could break the Streamlit app
+            4. Missing error handling or edge cases
+            5. Anything that could break the Streamlit app
             
             Be specific — mention exact file names and line numbers.
             Keep your review concise and actionable.
-          claude_args: "--model anthropic.claude-sonnet-4-20250514-v1:0"
+          claude_args: "--model global.anthropic.claude-sonnet-4-6"
