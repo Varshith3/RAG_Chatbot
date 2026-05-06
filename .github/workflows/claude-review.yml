@@ -7,6 +7,7 @@ on:
 jobs:
   claude-review:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       pull-requests: write
@@ -15,31 +16,42 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # Full git history so Claude understands context
+          fetch-depth: 0
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1   # Change this if your Bedrock is in a different region
+
+          # IMPORTANT
+          aws-region: us-east-1
 
       - name: Run Claude Code Review
         uses: anthropics/claude-code-action@v1
+        env:
+          ANTHROPIC_USE_BEDROCK: "true"
+
+          # Force exact Bedrock model
+          ANTHROPIC_MODEL: "anthropic.claude-3-haiku-20240307-v1:0"
+
+          # Disable prompt caching
+          DISABLE_PROMPT_CACHING: "true"
+
         with:
-          use_bedrock: "true"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
           prompt: |
-            You are a senior Python developer reviewing a RAG (Retrieval-Augmented Generation) chatbot project.
-            
-            Review the changes in this pull request and check for:
-            1. Python bugs or logic errors
-            2. LangChain / LLM integration issues
-            3. Security issues (hardcoded API keys, exposed secrets, unsafe user inputs)
-            4. Code quality and readability
-            5. Missing error handling or edge cases
-            6. Anything that could break the Streamlit app
-            
-            Be specific — mention exact file names and line numbers.
-            Keep your review concise and actionable.
-          claude_args: "--model apac.anthropic.claude-sonnet-4-20250514-v1:0"
+            You are a senior Python developer reviewing a RAG chatbot project.
+
+            Review the PR for:
+            - Python bugs
+            - LangChain issues
+            - Security problems
+            - Error handling
+            - Streamlit-breaking changes
+
+            Mention exact files and line numbers.
+
+          claude_args: |
+            --model anthropic.claude-3-haiku-20240307-v1:0
