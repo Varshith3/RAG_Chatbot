@@ -7,10 +7,10 @@ on:
 jobs:
   claude-review:
     runs-on: ubuntu-latest
+    
     permissions:
       contents: read
       pull-requests: write
-      issues: write
 
     steps:
       - name: Checkout code
@@ -31,15 +31,10 @@ jobs:
           use_bedrock: "true"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           show_full_output: true
-          permission_mode: "bypassPermissions"
+          
           prompt: |
-            You are a Python developer reviewing a RAG (Retrieval-Augmented Generation) chatbot project.
-            The PR number for this review is: ${{ github.event.pull_request.number }}
-            Repository: ${{ github.repository }}
-            Run: gh pr view ${{ github.event.pull_request.number }} to get PR details
-            Run: gh pr diff ${{ github.event.pull_request.number }} to get the diff
-            Then post your review as a comment using: gh pr comment ${{ github.event.pull_request.number }} --body "your review"
-                  
+            You are reviewing a RAG chatbot PR request.
+            
             Review the changes in this pull request and check for:
             1. Python bugs or logic errors
             2. LangChain / LLM integration issues
