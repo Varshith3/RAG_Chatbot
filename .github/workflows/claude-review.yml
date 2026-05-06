@@ -7,10 +7,14 @@ on:
 jobs:
   claude-review:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
     
     permissions:
       contents: read
       pull-requests: write
+      issues: write
+      id-token: write
 
     steps:
       - name: Checkout code
