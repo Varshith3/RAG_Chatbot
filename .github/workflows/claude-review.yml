@@ -42,4 +42,3 @@ jobs:
             
             Be specific — mention exact file names and line numbers.
             Keep your review concise and actionable.
-          claude_args: "--model apac.anthropic.claude-3-5-sonnet-20240620-v1:0"
