@@ -62,3 +62,7 @@ def get_answer(question):
     response = llm.predict(prompt).strip()
 
     return response
+
+# Test func to trigger claude code
+def greet(name):
+    print("Hello", name)
