@@ -62,3 +62,5 @@ def get_answer(question):
     response = llm.predict(prompt).strip()
 
     return response
+
+# Test comment to trigg claude code in github actions using bedrock.
